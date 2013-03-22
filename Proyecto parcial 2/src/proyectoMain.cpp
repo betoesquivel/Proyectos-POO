@@ -5,8 +5,9 @@ using namespace std;
 #include "Pasajero.h"
 #include "Fecha.h"
 #include "Hora.h"
+#include "Vuelo.h"
 
-string borde = "===============";
+const string borde = "===============";
 
 int main(){
 	cout<<borde<<"Bienvenido a mi proyecto parcial 2"<<borde; 
