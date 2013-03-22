@@ -15,6 +15,9 @@ class Pasajero{
 		
 		void setNombre(string);
 		string getNombre();
+		
+		//Comportamientos
+		void muestra();
 };
 	//CONSTRUCTORES
 	Pasajero::Pasajero(){
@@ -42,3 +45,9 @@ class Pasajero{
 		return nombre; 
 	}
 	//FIN DE SETTERS Y GETTERS
+
+	//COMPORTAMIENTOS
+	void Pasajero::muestra(){
+		cout<<id<<' '<<nombre<<endl; 	
+	}
+	//FIN DE COMPORTAMIENTOS

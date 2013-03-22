@@ -1,4 +1,3 @@
-
 class Fecha{
 	private:
 		int dd; 
@@ -19,6 +18,9 @@ class Fecha{
 	
 		void setAa(int);
 		int getAa();
+		
+		//Comportamientos
+		void muestra();
 };
 	//CONSTRUCTORES
 	Fecha::Fecha(){
@@ -55,3 +57,14 @@ class Fecha{
 		return aa; 
 	}
 	//FIN DE SETTERS Y GETTERS
+
+	//COMPORTAMIENTOS
+	void Fecha::muestra(){
+		string d, m, a; 
+		d = (dd<10) ? "0":"";
+		m = (mm<10) ? "0":"";
+		a = (aa<10) ? "0":"";
+		
+		cout<<d<<dd<<'/'<<m<<mm<<'/'<<a<<aa<<endl; 	
+	}
+	//FIN DE COMPORTAMIENTOS

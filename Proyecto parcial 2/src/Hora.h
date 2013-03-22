@@ -1,4 +1,3 @@
-
 class Hora{
 	private:
 		int hh;
@@ -15,6 +14,9 @@ class Hora{
 
 		void setMm(int);
 		int getMm();
+		
+		//Comportamientos
+		void muestra();
 };
 	//CONSTRUCTORES
 	Hora::Hora(){
@@ -42,3 +44,12 @@ class Hora{
 		return mm; 	
 	}
 	//FIN DE SETTERS Y GETTERS
+	
+	//COMPORTAMIENTOS
+	void Hora::muestra(){
+		string h = (hh<10) ? "0":"";
+		string m = (mm<10) ? "0":"";
+		
+		cout<<h<<hh<<':'<<m<<mm<<endl; 	
+	}
+	//FIN DE COMPORTAMIENTOS

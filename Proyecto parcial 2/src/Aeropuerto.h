@@ -15,6 +15,9 @@ class Aeropuerto{
 		
 		void setCiudad(string);
 		string getCiudad();
+		
+		//Comportamientos
+		void muestra();
 };
 	//CONSTRUCTORES
 	Aeropuerto::Aeropuerto(){
@@ -43,3 +46,8 @@ class Aeropuerto{
 	}
 	//FIN DE SETTERS Y GETTERS
 	
+	//COMPORTAMIENTOS
+	void Aeropuerto::muestra(){
+		cout<<clave<<' '<<ciudad<<endl; 	
+	}
+	//FIN DE COMPORTAMIENTOS

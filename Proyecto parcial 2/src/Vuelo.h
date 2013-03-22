@@ -35,6 +35,7 @@ class Vuelo{
 		
 		//Comportamientos
 		bool agregarPasajero(int);
+		void muestra(bool);
 };
 
 	//CONSTRUCTORES
@@ -42,6 +43,7 @@ class Vuelo{
 		numVuelo = "Vuelo Indefinido";
 		cveOrigen = "Origen Indefinido"; 
 		cveDestino = "Destino Indefinido"; 
+		cantidadPasajeros = 0; 
 		//No se si ya se hayan creado fecha y horaSalida, pero creo que si.
 	}
 	//FIN DE CONSTRUCTORES
@@ -101,5 +103,22 @@ class Vuelo{
 		}else{
 			return false; 	
 		}	
+	}
+	
+	void Vuelo::muestra(bool imprimirLista){
+		cout<<numVuelo<<endl;
+		cout<<"Origen: "<<cveOrigen<<endl;
+		cout<<"Destino: "<<cveDestino<<endl;
+		cout<<"Fecha: ";
+		fecha.muestra();
+		cout<<"Hora de Salida: ";
+		horaSalida.muestra();
+		cout<<"Cantidad de Pasajeros: "<<cantidadPasajeros<<endl; 
+		if(imprimirLista){
+			cout<<"Lista de Pasajeros:"<<endl;
+			for(int i = 0; i<maxPasajeros; i++){
+				cout<<listaPasajeros[i]<<endl;	
+			}	
+		}
 	}
 	//FIN DE COMPORTAMIENTOS
