@@ -35,7 +35,7 @@ class Vuelo{
 		
 		//Comportamientos
 		bool agregarPasajero(int);
-		void muestra(bool);
+		void muestra();
 };
 
 	//CONSTRUCTORES
@@ -105,7 +105,7 @@ class Vuelo{
 		}	
 	}
 	
-	void Vuelo::muestra(bool imprimirLista){
+	void Vuelo::muestra(){
 		cout<<numVuelo<<endl;
 		cout<<"Origen: "<<cveOrigen<<endl;
 		cout<<"Destino: "<<cveDestino<<endl;
@@ -114,11 +114,6 @@ class Vuelo{
 		cout<<"Hora de Salida: ";
 		horaSalida.muestra();
 		cout<<"Cantidad de Pasajeros: "<<cantidadPasajeros<<endl; 
-		if(imprimirLista){
-			cout<<"Lista de Pasajeros:"<<endl;
-			for(int i = 0; i<maxPasajeros; i++){
-				cout<<listaPasajeros[i]<<endl;	
-			}	
-		}
 	}
+	
 	//FIN DE COMPORTAMIENTOS

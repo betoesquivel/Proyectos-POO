@@ -21,6 +21,9 @@ class Fecha{
 		
 		//Comportamientos
 		void muestra();
+		
+		//Sobrecarga de Operadores
+		bool operator == (Fecha param);
 };
 	//CONSTRUCTORES
 	Fecha::Fecha(){
@@ -68,3 +71,11 @@ class Fecha{
 		cout<<d<<dd<<'/'<<m<<mm<<'/'<<a<<aa<<endl; 	
 	}
 	//FIN DE COMPORTAMIENTOS
+
+	//SOBRECARGA DE OPERADORES
+	bool Fecha::operator == (Fecha param){
+		bool igual = false;
+		igual = (dd==param.dd && mm==param.mm && aa==param.aa) ? true:false;
+		return igual;
+	}
+	//FIN DE SOBRECARGA DE OPERADORES
