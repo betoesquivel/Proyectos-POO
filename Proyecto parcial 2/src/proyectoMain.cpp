@@ -10,7 +10,9 @@ using namespace std;
 #include "Vuelo.h"
 
 const string borde = "===============";
-bool debug = true; 
+bool debug = false; 
+const string tag = "DEBUG::";
+
 const int numMaxAeropuertos = 5; 
 const int numMaxPasajeros = 30; 
 const int numMaxVuelos = 10; 
@@ -178,7 +180,9 @@ void cargarPasajeros(string nomArchPasajeros){
 	
 	while(!archPasajeros.eof() && i<numMaxPasajeros){
 		getline(archPasajeros, temp);//leo linea del archivo
-		
+		if(debug){
+			cout<<tag<<"La linea leida fue: "<<temp<<endl;	
+		}
 		//encuentra espacio separando la clave del nombre del aeropuerto
 		primerEspacio = temp.find_first_of(' ');
 		
@@ -189,6 +193,10 @@ void cargarPasajeros(string nomArchPasajeros){
 		
 		id = atoi(id_temp.c_str());//convierto id_temp a entero
 		//guardo los valores en el arreglo
+		//if(debug){
+			//cout<<tag<<"El id leida del pasajero "<<i<<" es: "<<id;	
+			//cout<<tag<<"El nombre leido del pasajero "<<i<<" es: "<<nom_temp;	
+		//}
 		pasajeros[i].setId(id);
 		pasajeros[i].setNombre(nom_temp);
 		
@@ -419,10 +427,9 @@ bool Menu(){
 				
 				cout<<endl;
 				
-				cout<<"Lista de pasajeros: "<<endl;
 				//ya tengo el índice del arreglo vuelos donde está el vuelo...
 				vuelos[indiceVuelos].muestra();
-				
+				cout<<"Lista de pasajeros: "<<endl;
 				//Imprimo la lista de pasajeros...
 				
 				//Extraigo la cantidad de pasajeros, para poder recorrer la lista con ids
@@ -484,8 +491,11 @@ int main(){
 	
 	cout<<endl; 
 	cin.ignore();
+	
 	cargarAeropuertos(archivoAeropuertos);
 	cargarPasajeros(archivoPasajeros);
+	if(debug)
+		imprimirPasajeros();
 	cin.ignore();
 	introducirVuelos();
 	if(debug){
