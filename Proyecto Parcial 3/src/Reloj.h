@@ -1,60 +1,108 @@
 
 class Reloj{
 	private:
-		int hora;
-		int minutos;
+		int hh;
+		int mm;
 	public: 
 		Reloj();
 		Reloj(int h);
 		Reloj(int h, int m);
-		int getHora();
-		void setHora(int h);
-		int getMinutos();
-		void setMinutos(int m);
-		void muestra();
+		int getHh();
+		void setHh(int h);
+		int getMm();
+		void setMm(int m);
+        friend ostream& operator<< (ostream& os, Reloj r);
+        friend istream& operator>> (istream& is, Reloj &r);
+        bool operator== (Reloj param); 
+        bool operator<= (Reloj param); 
+        bool operator>= (Reloj param); 
+        int operator- (Reloj param);
+        void operator= (int); 
+
 };
 
 //CONSTRUCTORES
 Reloj::Reloj(){
-	hora = 0;
-	minutos = 0;
+	hh = 0;
+	mm = 0;
 }
 
 Reloj::Reloj(int h){
-	hora = h;
-	minutos = 0;
+	hh = h;
+	mm = 0;
 }
 
 Reloj::Reloj(int h, int m){
-	hora = h;
-	minutos = m;
+	hh = h;
+	mm = m;
 }
 
 //SETTERS Y GETTERS
-int Reloj::getHora(){
-	return hora; 
+int Reloj::getHh(){
+	return hh; 
 }
 
-void Reloj::setHora(int h){
-	hora = h; 
+void Reloj::setHh(int h){
+	hh = h; 
 }
 
 
-int Reloj::getMinutos(){
-	return minutos; 
+int Reloj::getMm(){
+	return mm; 
 }
 
-void Reloj::setMinutos(int m){
-	minutos = m; 
+void Reloj::setMm(int m){
+	mm = m; 
 }
 
 //COMPORTAMIENTOS
-void Reloj::muestra(){
-	if(hora<10)
-		cout<<0;
-	cout<<hora<<":";
+ostream& operator<< (ostream& os, Reloj r){
+
+	if(r.hh<10)
+		os<<0;
+	os<<r.hh<<":";
 	
-	if(minutos<10)
-		cout<<0;
-	cout<<minutos<<endl;
+	if(r.mm<10)
+		os<<0;
+	os<<r.mm<<endl;
+    return os; 
+
 }
+
+istream& operator>> (istream& is, Reloj &r){
+    is>>r.hh>>r.mm;
+    return is; 
+}
+
+bool Reloj::operator== (Reloj param){
+
+    return (hh==param.hh && mm==param.mm) ? true:false; 
+
+}
+
+bool Reloj::operator<= (Reloj param){
+
+    return (hh*60+mm <= param.hh*60+param.mm) ? true:false; 
+
+}
+
+bool Reloj::operator>= (Reloj param){
+
+    return (hh*60+mm >= param.hh*60+param.mm) ? true:false; 
+
+}
+
+int Reloj::operator- (Reloj param){
+
+    return ((hh*60+mm) - (param.hh*60+param.mm));
+
+}
+
+void Reloj::operator= (int m){
+
+   mm = m%60;
+   hh = m/60;
+   hh = hh%24; 
+
+}
+
