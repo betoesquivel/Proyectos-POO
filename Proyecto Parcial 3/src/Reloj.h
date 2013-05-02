@@ -11,14 +11,13 @@ class Reloj{
 		void setHh(int h);
 		int getMm();
 		void setMm(int m);
+        void convertirMinutosAHoraCompleta(int m); 
         friend ostream& operator<< (ostream& os, Reloj r);
         friend istream& operator>> (istream& is, Reloj &r);
         bool operator== (Reloj param); 
         bool operator<= (Reloj param); 
         bool operator>= (Reloj param); 
         int operator- (Reloj param);
-        void operator= (int); 
-
 };
 
 //CONSTRUCTORES
@@ -55,11 +54,18 @@ void Reloj::setMm(int m){
 	mm = m; 
 }
 
+void Reloj::convertirMinutosAHoraCompleta(int m){
+   mm = m%60;
+   hh = m/60;
+   hh = hh%24; 
+}
+
 //COMPORTAMIENTOS
 ostream& operator<< (ostream& os, Reloj r){
 
 	if(r.hh<10)
 		os<<0;
+
 	os<<r.hh<<":";
 	
 	if(r.mm<10)
@@ -98,11 +104,4 @@ int Reloj::operator- (Reloj param){
 
 }
 
-void Reloj::operator= (int m){
-
-   mm = m%60;
-   hh = m/60;
-   hh = hh%24; 
-
-}
 

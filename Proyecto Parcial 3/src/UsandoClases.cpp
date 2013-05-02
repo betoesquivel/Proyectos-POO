@@ -2,6 +2,11 @@
 
 using namespace std; 
 #include "Reloj.h"
+#include "Registro.h"
+#include "Tarjeta.h"
+#include "TarjetaEmpleado.h"
+#include "TarjetaProveedor.h"
+#include "TarjetaCliente.h"
 
 int main(){
     Reloj r(10,10); 
@@ -13,7 +18,7 @@ int main(){
     cin>>r2; 
     cout<<r2<<endl; 
 
-    r = r-r2;
+    r.convertirMinutosAHoraCompleta(r-r2);
     cout<<r<<endl;
 
 	return 0; 
