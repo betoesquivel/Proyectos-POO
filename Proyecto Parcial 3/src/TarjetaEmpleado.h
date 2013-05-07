@@ -4,7 +4,7 @@ class TarjetaEmpleado : public Tarjeta{
         string Tienda; 
     public: 
         TarjetaEmpleado();
-        TarjetaEmpleado(int id, string T);
+        TarjetaEmpleado(int id, int idE, string T);
 
         void setIdEmp(int id);
         int getIdEmp();
@@ -16,12 +16,12 @@ class TarjetaEmpleado : public Tarjeta{
         void muestraDatos();
 };
 
-TarjetaEmpleado::TarjetaEmpleado(){
+TarjetaEmpleado::TarjetaEmpleado():Tarjeta(){
     idEmp = -1; 
     Tienda = "Sin nombre"; 
 }
-TarjetaEmpleado::TarjetaEmpleado(int id, string T){
-    idEmp = id; 
+TarjetaEmpleado::TarjetaEmpleado(int id, int idE, string T):Tarjeta(id){
+    idEmp = idE; 
     Tienda = T; 
 }
 

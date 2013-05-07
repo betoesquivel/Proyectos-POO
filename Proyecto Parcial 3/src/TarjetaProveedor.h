@@ -4,7 +4,7 @@ class TarjetaProveedor : public Tarjeta{
         string Empresa; 
     public: 
         TarjetaProveedor();
-        TarjetaProveedor(int id, string E);
+        TarjetaProveedor(int id, int idP, string E);
 
         void setIdPro(int id);
         int getIdPro();
@@ -20,8 +20,8 @@ TarjetaProveedor::TarjetaProveedor(){
     idPro = -1; 
     Empresa = "Sin nombre"; 
 }
-TarjetaProveedor::TarjetaProveedor(int id, string E){
-    idPro = id; 
+TarjetaProveedor::TarjetaProveedor(int id, int idP, string E):Tarjeta(id){
+    idPro = idP; 
     Empresa = E; 
 }
 

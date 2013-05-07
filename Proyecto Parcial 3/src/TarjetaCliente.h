@@ -3,7 +3,7 @@ class TarjetaCliente : public Tarjeta{
         int idCli;
     public: 
         TarjetaCliente();
-        TarjetaCliente(int id);
+        TarjetaCliente(int id, int idC);
 
         void setIdCli(int id);
         int getIdCli();
@@ -12,11 +12,11 @@ class TarjetaCliente : public Tarjeta{
         void muestraDatos();
 };
 
-TarjetaCliente::TarjetaCliente(){
+TarjetaCliente::TarjetaCliente():Tarjeta(){
     idCli = -1; 
 }
-TarjetaCliente::TarjetaCliente(int id){
-    idCli = id; 
+TarjetaCliente::TarjetaCliente(int id, int idC):Tarjeta(id){
+    idCli = idC; 
 }
 
 
