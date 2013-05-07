@@ -12,13 +12,19 @@ using namespace std;
 
 //información para arreglos de tarjetas
 const int tamMaxTarjetas = 40; 
+const int tarifaxhora = 15;
 char tipoTarjetas[tamMaxTarjetas];
 int idTarjetas[tamMaxTarjetas];
 int idEspecificos[tamMaxTarjetas];
 string tienda_empresas[tamMaxTarjetas];
+
 int indice; //Variable con el índice de una tarjeta en el arreglo
+int indiceEstacionados; //Variable con el indice de la tarjeta de un auto estacionado
+int numTarjetas = 0;
+int numEstacionados = 0;
 
 Tarjeta* tarjetas[40];
+Registro estacionados[20];
 
 bool debug = true; 
 string TAG = "DEBUG::";
@@ -27,17 +33,9 @@ string border = "====================";
 
 void imprimirTodasTarjetas(){
     
-    //como ya se
-    if(debug)
-        cout<<TAG<<"COMO YA SE IMPRIMIR"<<endl;
-    for(int i = 0; i<40; i++){
-        if(idTarjetas[i]!=0)
-            cout<<tipoTarjetas[i]<<' '<<idTarjetas[i]<<' '<<idEspecificos[i]<<' '<<tienda_empresas[i]<<endl;
-    }
-
     if(debug)
         cout<<TAG<<"USANDO ARREGLO DE APUNTADORES"<<endl;
-    for(int i = 0; i<40; i++){
+    for(int i = 0; i<numTarjetas; i++){
         if(tarjetas[i]->getIdTarjeta()!=0){
             tarjetas[i]->muestraDatos();
             cout<<endl;
@@ -99,7 +97,7 @@ void cargarTarjetas(string archivo){
         idTarjetas[i] = idTarjeta; 
         idEspecificos[i] = idEspecifico; 
         tienda_empresas[i] = tienda_empresa;
-
+        numTarjetas++;
         i++;
     }
   
@@ -109,9 +107,50 @@ void cargarTarjetas(string archivo){
 }
 
 //validar hora
+bool validarHora(int h, int m){
+    return (h<22 && h>=8 && m<60 && m>=0) ? true:false; 
+}
 //validar hora salida
+//se supone que cuando mando a llamar a este método ya validé primero la tarjeta
+//asi que ya tengo el indice donde esta la hora guardado en la variable indice. 
+bool validarHoraSalida(Reloj rSalida){
+    bool valido = false; 
+    Reloj rEntrada;
+    rEntrada = estacionados[indice].getHrEntrada();
+    if(rSalida>=rEntrada)
+        valido = true; 
+    else
+        valido = false; 
+    return valido; 
+}
+
 //validar tarjeta existente
+bool validarTarjetaExistente(int id){
+    int i = 0; 
+    bool encontrado = false; 
+    while(i<numTarjetas && !encontrado){
+        if(tarjetas[i]->getIdTarjeta() == id){
+            encontrado = true; 
+            indice = i; 
+        }
+        i++;
+    }
+    return encontrado; 
+}
 //validar tarjeta existente en estacionamiento
+bool validarTarjetaExistenteEstacionamiento(int id){
+    int i = 0; 
+    bool encontrado = false; 
+    while(i<numTarjetas && !encontrado){
+        if(estacionados[i].getIdTarj() == id){
+            encontrado = true; 
+            indiceEstacionados = i;
+        }
+        i++;
+    }
+    return encontrado; 
+}
+
 char Menu(){
     char op; 
     cout<<endl;
@@ -131,7 +170,6 @@ char Menu(){
 
 int main(){
 	
-	Registro estacionados[20];
     
     string nomArchivoDatos; 
     cout<<"Introduzca el nombre del archivo con los datos de las tarjetas: (con .txt)"<<endl;
@@ -142,23 +180,107 @@ int main(){
         imprimirTodasTarjetas();
     }
     char opcion = ' ';
+    int id, h, m; 
+    bool valido = false; 
+    Reloj temp; 
+    int totalAPagar = 0;
     do{
         opcion = Menu();
         switch(opcion){
             case 'a':
-                //hacer algo
+                //valido el id
+                do{
+                    cout<<"Introduzca el id de la tarjeta del auto que entra: "<<endl;
+                    cin>>id; 
+                    valido = validarTarjetaExistente(id);
+                    if(valido){
+                        do{
+                            cout<<"Introduzca la hora de entrada del auto: "<<endl;
+                            cin>>temp;
+                            valido = validarHora(temp.getHh(),temp.getMm());
+                            if(!valido) 
+                                cout<<"Esa hora no es valida. Intente de nuevo."<<endl;
+                            else{
+                                estacionados[numEstacionados].setIdTarj(id);
+                                estacionados[numEstacionados].setHrEntrada(temp);
+                                numEstacionados++;
+                            }
+                                
+                        }while(!valido);
+                    }else{
+                        cout<<"Esa tarjeta no existe. Intente de nuevo."<<endl;
+                    }
+                }while(!valido);
                 break;
             case 'b':
-                //hacer algo
+                do{
+                    cout<<"Introduzca el id de la tarjeta del auto que sale: "<<endl;
+                    cin>>id; 
+                    valido = validarTarjetaExistente(id);
+                    if(valido)
+                        valido = validarTarjetaExistenteEstacionamiento(id);
+                    
+                    if(valido){
+                        do{
+                            cout<<"Introduzca la hora de salida del auto: "<<endl;
+                            cin>>temp;
+                            valido = validarHora(temp.getHh(),temp.getMm());
+
+                            if(!valido) 
+                                cout<<"Esa hora no es valida. Intente de nuevo."<<endl;
+                            else{
+                                valido = validarHoraSalida(temp);
+                                if(valido){
+                                    //despliego la informacion del auto y su importe a pagar
+                                    //ya tengo el indice de la tarjeta en la variable indice
+                                    //ya tengo el indice en estacionados en la variable indiceEstacionados
+                                    
+                                    Reloj entrada; 
+                                    entrada.setHh(estacionados[indiceEstacionados].getHrEntrada().getHh());
+                                    entrada.setMm(estacionados[indiceEstacionados].getHrEntrada().getMm());
+                                    cout<<"HORA DE ENTRADA:"<<endl;
+                                    cout<<entrada;
+                                    cout<<"HORA DE SALIDA:"<<endl;
+                                    cout<<temp;
+
+                                    totalAPagar = tarjetas[indice]->calculaPago(entrada, temp, tarifaxhora);
+                                    cout<<"Horas a cobrar:"<<endl;
+                                    cout<< totalAPagar/tarifaxhora <<endl;
+
+                                    cout<<"Monto total: "<<endl;
+                                    cout<< totalAPagar <<endl;
+
+                                    //AQUI TENDRÍA QUE HACER TODOS LOS SHIFTS EN EL ARREGLO DE ESTACIONADOS PORQUE YA SE SALIÓ UN AUTO...
+                                    
+                                    
+
+                                }else{
+                                    cout<<"Esa hora no es valida. Intente de nuevo."<<endl;
+                                }
+                            }
+                                
+                        }while(!valido);
+                    }else{
+                        cout<<"Esa tarjeta no existe o no se encuentra en el estacionamiento. Intente de nuevo."<<endl;
+                    }
+                }while(!valido);
                 break;
             case 'c':
-                //hacer algo
+                int idBuscada;
+                for(int i = 0; i<numEstacionados; i++){
+                    idBuscada = estacionados[i].getIdTarj();
+                    validarTarjetaExistente(idBuscada);
+                    //ya tengo en la variable indice el indice donde encontro la variable
+                    tarjetas[indice]->muestraDatos();
+                    cout<<endl;
+                }
                 break;
             case 'd':
-                //hacer algo
+                cout<<"Estas son todas las tarjetas disponibles: "<<endl; 
+                imprimirTodasTarjetas();
                 break;
             case 'e':
-                cout<<"Gracias por usar la aplicación."<<endl;
+                cout<<"Gracias por usar la aplicacion."<<endl;
                 break;
             default:
                 cout<<"Esa no es una opcion valida. Intente otra vez."<<endl;
