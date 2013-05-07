@@ -34,5 +34,6 @@ int TarjetaCliente::calculaPago(Reloj hEntrada, Reloj hSalida, int tarifaxhora){
     return pago; 
 }
 void TarjetaCliente::muestraDatos(){
-    cout<<idCli<<endl;
+    cout<<"CLIENTE "<<idCli<<endl;
+    cout<<"Tarjeta "<<idTarjeta<<endl;
 }

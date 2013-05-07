@@ -49,5 +49,7 @@ int TarjetaProveedor::calculaPago(Reloj hEntrada, Reloj hSalida, int tarifaxhora
     return pago; 
 }
 void TarjetaProveedor::muestraDatos(){
-    cout<<idPro<<' '<<Empresa<<endl;
+    cout<<"PROVEEDOR "<<idPro<<endl;
+    cout<<"Tarjeta "<<idTarjeta<<endl;
+    cout<<"Empresa "<<Empresa<<endl;
 }

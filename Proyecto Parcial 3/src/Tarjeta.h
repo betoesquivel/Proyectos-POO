@@ -1,5 +1,5 @@
 class Tarjeta{
-    private:
+    protected:
         int idTarjeta; 
     public: 
         Tarjeta();

@@ -1,28 +1,1 @@
-E 101 201 SanbornsC 102 401
-P 103 301 Office DepotC 104 402
-P 105 302 Sabritas
-E 106 201 Liverpool
-P 107 303 Pepe Jeans
-C 108 403
-C 109 404
-C 110 405
-P 111 304 Vinoteca del Norte
-P 112 305 Pasteleria Lety
-E 113 202 Deporte Marti
-E 114 203 Music and More
-C 115 406
-C 116 407
-E 117 204 Liverpool
-C 118 408
-E 119 205 Sanborns
-P 120 306 Coca Cola
-C 121 409
-P 122 307 Anotojeria Rosita
-P 123 308 Botanas Leo
-E 124 206 Nutrisa
-E 125 207 Liverpool
-E 126 208 Helados Sultana
-C 127 410
-P 128 309 Panificadora Bimbo
-C 129 411
-C 130 412
+E 101 201 SanbornsC 102 401P 103 301 Office DepotC 104 402P 105 302 SabritasE 106 201 LiverpoolP 107 303 Pepe JeansC 108 403C 109 404C 110 405P 111 304 Vinoteca del NorteP 112 305 Pasteleria LetyE 113 202 Deporte MartiE 114 203 Music and MoreC 115 406C 116 407E 117 204 LiverpoolC 118 408E 119 205 SanbornsP 120 306 Coca ColaC 121 409P 122 307 Anotojeria RositaP 123 308 Botanas LeoE 124 206 NutrisaE 125 207 LiverpoolE 126 208 Helados SultanaC 127 410P 128 309 Panificadora BimboC 129 411C 130 412

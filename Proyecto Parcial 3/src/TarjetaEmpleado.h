@@ -47,6 +47,8 @@ int TarjetaEmpleado::calculaPago(Reloj hEntrada, Reloj hSalida, int tarifaxhora)
     return pago; 
 }
 void TarjetaEmpleado::muestraDatos(){
-    cout<<idEmp<<' '<<Tienda<<endl;
+    cout<<"EMPLEADO "<<idEmp<<endl;
+    cout<<"Tarjeta "<<idTarjeta<<endl;
+    cout<<"Tienda "<<Tienda<<endl;
 }
 

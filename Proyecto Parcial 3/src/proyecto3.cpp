@@ -38,8 +38,10 @@ void imprimirTodasTarjetas(){
     if(debug)
         cout<<TAG<<"USANDO ARREGLO DE APUNTADORES"<<endl;
     for(int i = 0; i<40; i++){
-        if(tarjetas[i]->getIdTarjeta()!=0)
+        if(tarjetas[i]->getIdTarjeta()!=0){
             tarjetas[i]->muestraDatos();
+            cout<<endl;
+        }
     }
 
 }
@@ -49,7 +51,6 @@ void cargarTarjetas(string archivo){
 
 	ifstream a;
 	a.open(archivo.c_str());
-	//Loop que lea y cargue las tarjetas en los arreglos paralelos
     char tipoTarjeta;
     int idTarjeta, idEspecifico; 
     string temp; 
@@ -57,6 +58,7 @@ void cargarTarjetas(string archivo){
 
     string linea; 
     int i = 0; 
+	//Loop que lea y cargue las tarjetas en los arreglos paralelos
     while( getline(a,linea) ){
         //partir la línea
         istringstream iss( linea ); 

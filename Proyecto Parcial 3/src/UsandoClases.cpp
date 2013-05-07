@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 
 using namespace std; 
 #include "Reloj.h"
@@ -9,17 +10,15 @@ using namespace std;
 #include "TarjetaCliente.h"
 
 int main(){
-    Reloj r(10,10); 
-	cout<<"Hola mundo."<<endl;
-    cout<<r<<endl;
-    
-    Reloj r2; 
-    cout<<"Cambia el reloj:"<<endl;
-    cin>>r2; 
-    cout<<r2<<endl; 
+    string linea = "P 103 169 Office Depot";
+    istringstream iss( linea ); 
+    char tipo;
+    int n1, n2;
+    string nom; 
+    iss>>tipo;
+    iss>>n1>>n2; 
+    getline(iss, nom); 
 
-    r.convertirMinutosAHoraCompleta(r-r2);
-    cout<<r<<endl;
-
+    cout<<tipo<<' '<<n1<<' '<<n2<<' '<<nom<<endl; 
 	return 0; 
 }
