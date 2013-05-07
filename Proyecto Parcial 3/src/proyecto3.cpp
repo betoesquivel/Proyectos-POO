@@ -151,6 +151,15 @@ bool validarTarjetaExistenteEstacionamiento(int id){
     return encontrado; 
 }
 
+void sacarAuto(){
+    //utilizando la variable indiceEstacionados, voya borrar ese auto y mover todos los demas hacia arriba.
+    for(int i = indiceEstacionados; i<numEstacionados-1; i++){
+        //el i+1 lo pongo en el i
+        estacionados[i] = estacionados[i+1];
+    }
+    numEstacionados--;
+}
+
 char Menu(){
     char op; 
     cout<<endl;
@@ -251,6 +260,7 @@ int main(){
                                     cout<< totalAPagar <<endl;
 
                                     //AQUI TENDRÍA QUE HACER TODOS LOS SHIFTS EN EL ARREGLO DE ESTACIONADOS PORQUE YA SE SALIÓ UN AUTO...
+                                    sacarAuto();
                                     
                                     
 
